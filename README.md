@@ -1,9 +1,9 @@
 # NEXTApi
-Lightweight but powerfull RESTApi Seed Project By REMMSOFT ;)
+Lightweight but powerfull RESTApi Boilerplate Project By REMMSOFT ;)
 
 Platform: Node.js
 
-RESTApi: Hapijs
+RESTApi: KoaJS
 
 DOC: apidocjs
 
