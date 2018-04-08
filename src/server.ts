@@ -1,6 +1,7 @@
 import * as Koa from 'koa';
 import { routes } from './route';
 import { config } from './config';
+import { sequelize, dbSeed } from './db/index';
 
 const app = new Koa();
 
@@ -13,6 +14,16 @@ app.use(async (ctx, next) => {
 
 app.use(routes);
 
-app.listen(config.port);
+(async () => {
+    await sequelize
+        .sync({ force: true });
 
-console.log('Server running on port ' + config.port);
+    await dbSeed();
+
+    app.listen(config.port);
+    console.log('Server running on port ' + config.port);
+})();
+
+
+
+

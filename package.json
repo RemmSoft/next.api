@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch-server": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' ./src/server.ts"
+    "start": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' ./src/server.ts"
   },
   "author": "",
   "license": "ISC",
@@ -20,7 +20,12 @@
     "koa-cors": "0.0.16",
     "koa-router": "^7.4.0",
     "koa-static": "^4.0.2",
-    "koa-validate": "^1.0.7"
+    "koa-validate": "^1.0.7",
+    "pg": "^7.4.1",
+    "pg-hstore": "^2.3.2",
+    "reflect-metadata": "^0.1.12",
+    "sequelize": "^4.37.4",
+    "sequelize-typescript": "^0.6.3"
   },
   "devDependencies": {
     "@types/dotenv": "^4.0.2",
