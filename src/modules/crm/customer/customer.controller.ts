@@ -1,11 +1,13 @@
 import * as Router from 'koa-router';
+import { Customer } from '../../../db/models/Customer';
 
 const router = new Router();
 
 router.get('/customer/get', getCustomers);
 async function getCustomers(ctx: any, next: any) {
-    // tslint:disable-next-line:quotemark
-    const list = [{ name: "Ali" }, { name: "Veli" }];
+
+    const list = await Customer.findAll();
+
     ctx.body = list;
 }
 
