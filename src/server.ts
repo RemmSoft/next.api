@@ -1,10 +1,12 @@
 import * as Koa from 'koa';
-import { routes } from './route';
+import { router } from './route';
 import { config } from './config';
 import { sequelize, dbSeed } from './db/index';
+import { Auth } from "./auth";
+
+Auth.init();
 
 const app = new Koa();
-
 app.use(async (ctx, next) => {
     // Log the request to the console
     console.log('Url:', ctx.url);
@@ -12,7 +14,8 @@ app.use(async (ctx, next) => {
     await next();
 });
 
-app.use(routes);
+app.use(router.routes());
+app.use(router.allowedMethods());
 
 (async () => {
     await sequelize

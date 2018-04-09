@@ -1,16 +1,15 @@
 
 import * as Router from 'koa-router';
+import { firebaseAuthMiddleware } from "./auth";
+import { customerRouters } from './modules/crm/customer/customer.controller';
+import { authRouters } from "./modules/auth/auth.controller";
+
 const router = new Router();
-
-// router.get('/*', async (ctx) => {
-//     ctx.body = 'Hello World!';
-// });
-
+// auth
+router.use('/api', firebaseAuthMiddleware);
 
 // import modules
-import { customerRouters } from './modules/crm/customer/customer.controller';
 router.use(customerRouters);
+router.use(authRouters);
 
-const routes = router.routes();
-
-export { routes };
+export { router };

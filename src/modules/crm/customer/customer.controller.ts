@@ -3,12 +3,20 @@ import { Customer } from '../../../db/models/Customer';
 
 const router = new Router();
 
-router.get('/customer/get', getCustomers);
+router.get('/api/customer/get', getCustomers);
 async function getCustomers(ctx: any, next: any) {
 
-    const list = await Customer.findAll();
+    // ctx.body = JSON.stringify({
+    //     message: `You're logged in as ${ctx.state.user.email} with Firebase UID: ${ctx.state.user.uid}`
+    // });
 
-    ctx.body = list;
+    try {
+        const list = await Customer.findAll();
+        ctx.body = list;
+        return next();
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const customerRouters = router.routes();
