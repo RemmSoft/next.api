@@ -1,12 +1,16 @@
 import * as Koa from 'koa';
-import { routes } from './route';
+import { router } from './route';
 import { config } from './config';
 import "reflect-metadata";
 import { dbInit } from './db/db.init';
+import { Auth } from "./auth";
+
 
 // DB Init
 dbInit().then(
     () => {
+        Auth.init();
+
         const app = new Koa();
 
         app.use(async (ctx, next) => {
@@ -16,7 +20,9 @@ dbInit().then(
             await next();
         });
 
-        app.use(routes);
+        app.use(router.routes());
+        app.use(router.allowedMethods());
+
 
         app.listen(config.port);
 

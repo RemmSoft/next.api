@@ -4,12 +4,15 @@ import { Customer } from '../../../db/entity/customer';
 
 const router = new Router();
 
-router.get('/customer/get', getCustomers);
+router.get('/api/customer/get', getCustomers);
 async function getCustomers(ctx: any, next: any) {
-    // tslint:disable-next-line:quotemark
-    const list = await getRepository(Customer).find();
-
-    ctx.body = list;
+    try {
+        const list = await getRepository(Customer).find();
+        ctx.body = list;
+        return next();
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const customerRouters = router.routes();
